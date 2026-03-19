@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"time"
 
 	"charm.land/huh/v2/spinner"
 	"github.com/charmbracelet/log"
@@ -73,6 +74,7 @@ var Root = &cobra.Command{
 			ActionWithErr(func(ctx context.Context) error {
 				return orb.Refresh()
 			}).
+			WithTheme(&ui.SpinnerTheme{}).
 			Run()
 		if err != nil {
 			return err
@@ -101,21 +103,22 @@ var Root = &cobra.Command{
 			return nil
 		}
 
-		err = spinner.New().
+		return spinner.New().
 			Title(fmt.Sprintf("%s: %s", reqOp, manager.Selection)).
 			ActionWithErr(func(ctx context.Context) error {
 				switch manager.Request() {
 				case ui.Install:
 					return orb.Install(manager.Selection)
 				case ui.Update:
+					time.Sleep(1 * time.Second)
 					return orb.Update(manager.Selection)
 				case ui.Remove:
+					time.Sleep(1 * time.Second)
 					return orb.Remove(manager.Selection)
 				}
 				return nil
 			}).
+			WithTheme(&ui.SpinnerTheme{}).
 			Run()
-
-		return err
 	},
 }

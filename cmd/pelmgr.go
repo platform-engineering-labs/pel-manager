@@ -6,6 +6,7 @@ import (
 
 	"charm.land/fang/v2"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/cli"
+	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
 )
 
 func main() {
@@ -13,6 +14,7 @@ func main() {
 		context.Background(),
 		cli.Root,
 		fang.WithoutVersion(),
+		fang.WithColorSchemeFunc(ui.FangTheme),
 	); err != nil {
 		os.Exit(1)
 	}
