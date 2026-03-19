@@ -16,7 +16,7 @@ import (
 )
 
 func init() {
-	Root.PersistentFlags().String("log", "", "log level: ERR, WARN, INFO, DEBUG, FATAL")
+	Root.PersistentFlags().String("log", "", "log level: ERR | WARN | INFO | DEBUG | FATAL")
 }
 
 var Root = &cobra.Command{
@@ -30,7 +30,13 @@ var Root = &cobra.Command{
 			if !sys.SudoSessionActive() {
 				fmt.Println("PEL Manager must run as a privileged user")
 			}
-			err := sys.InvokeSelfWithSudo(args...)
+
+			var cmdArgs []string
+			if logLevel != "" {
+				cmdArgs = append(cmdArgs, "--log", logLevel)
+			}
+
+			err := sys.InvokeSelfWithSudo(cmdArgs...)
 			if err != nil {
 				return err
 			}
