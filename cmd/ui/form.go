@@ -116,6 +116,9 @@ func NewManager(available map[string]*records.Status) *Manager {
 				TitleFunc(func() string {
 					return fmt.Sprintf("Manage: %s", m.Selection)
 				}, &m.Selection).
+				DescriptionFunc(func() string {
+					return fmt.Sprintf("\nversion: %s", m.Available[m.Selection].Available[0].Version.Short())
+				}, &m.Selection).
 				Affirmative("Update").
 				Negative("Remove").
 				Value(&m.Operation),
@@ -131,6 +134,9 @@ func NewManager(available map[string]*records.Status) *Manager {
 			huh.NewConfirm().
 				TitleFunc(func() string {
 					return fmt.Sprintf("Manage: %s", m.Selection)
+				}, &m.Selection).
+				DescriptionFunc(func() string {
+					return fmt.Sprintf("\nversion: %s", m.Available[m.Selection].Available[0].Version.Short())
 				}, &m.Selection).
 				Affirmative("Install").
 				Negative("Cancel").

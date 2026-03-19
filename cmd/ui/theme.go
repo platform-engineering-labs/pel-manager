@@ -23,7 +23,7 @@ func (f *FormTheme) Theme(isDark bool) *huh.Styles {
 
 	theme.Focused.SelectedOption = theme.Focused.SelectedOption.Foreground(orange)
 	theme.Blurred.NoteTitle = theme.Focused.NoteTitle.Foreground(green).Bold(false).MarginBottom(1)
-	theme.Focused.FocusedButton = theme.Focused.FocusedButton.Foreground(cream).Background(orange)
+	theme.Focused.FocusedButton = theme.Focused.FocusedButton.Foreground(cream).Background(charmtone.Bengal)
 
 	return theme
 }
