@@ -23,7 +23,7 @@ func (f *FormTheme) Theme(isDark bool) *huh.Styles {
 
 	theme.Focused.SelectedOption = theme.Focused.SelectedOption.Foreground(orange)
 	theme.Blurred.NoteTitle = theme.Focused.NoteTitle.Foreground(green).Bold(false).MarginBottom(1)
-	theme.Focused.FocusedButton = theme.Focused.FocusedButton.Foreground(cream).Background(charmtone.Bengal)
+	theme.Focused.FocusedButton = theme.Focused.FocusedButton.Foreground(cream).Background(orange)
 
 	return theme
 }
@@ -40,13 +40,15 @@ func (s *SpinnerTheme) Theme(isDark bool) *spinner.Styles {
 }
 
 func FangTheme(darkFunc lipgloss.LightDarkFunc) fang.ColorScheme {
+	orange := lipgloss.Color("#FF5F15")
+
 	theme := fang.DefaultColorScheme(darkFunc)
 	theme.ErrorHeader = [2]color.Color{
 		charmtone.Butter,
-		charmtone.Bengal,
+		orange,
 	}
 
-	theme.Command = darkFunc(charmtone.Bengal, charmtone.Bengal)
+	theme.Command = darkFunc(orange, orange)
 
 	return theme
 }
