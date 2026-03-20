@@ -18,8 +18,20 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 	}
 
 	LoggerFromFlag(level, nil)
-	
-	return setup()
+
+	orb, err := setup()
+	if err != nil {
+		return nil, err
+	}
+
+	if orb.Ready() != true {
+		_, err = orb.Initialize()
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return orb, nil
 }
 
 func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
