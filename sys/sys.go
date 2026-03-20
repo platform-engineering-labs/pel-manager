@@ -11,6 +11,10 @@ func IsPrivilegedUser() bool {
 }
 
 func InvokeSelfWithSudo(args ...string) error {
+	if len(args) == 0 {
+		args = os.Args[1:]
+	}
+
 	self, err := os.Executable()
 	if err != nil {
 		return err

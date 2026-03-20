@@ -8,7 +8,7 @@ import (
 
 var Logger = log.New(os.Stderr)
 
-func LoggerFromFlag(level string, err error) string {
+func LoggerFromFlag(level string, _ error) {
 	switch level {
 	case "ERR":
 		Logger.SetLevel(log.ErrorLevel)
@@ -21,6 +21,4 @@ func LoggerFromFlag(level string, err error) string {
 	default:
 		Logger.SetLevel(log.FatalLevel)
 	}
-
-	return level
 }
