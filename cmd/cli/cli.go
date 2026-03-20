@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"charm.land/huh/v2/spinner"
-	"github.com/charmbracelet/log"
 	"github.com/platform-engineering-labs/orbital/mgr"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
 	"github.com/platform-engineering-labs/pel-mananager/sys"
@@ -16,6 +15,12 @@ import (
 )
 
 func init() {
+	Root.AddCommand(Install)
+	Root.AddCommand(List)
+	Root.AddCommand(Remove)
+	Root.AddCommand(Update)
+	Root.AddCommand(Versions)
+
 	Root.PersistentFlags().String("log", "", "log level: ERR | WARN | INFO | DEBUG | FATAL")
 }
 
@@ -24,7 +29,7 @@ var Root = &cobra.Command{
 	Short: "pel manager - install/update/remove PEL tools",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		logLevel, _ := cmd.Flags().GetString("log")
+		level := LoggerFromFlag(cmd.Flags().GetString("log"))
 
 		if !sys.IsPrivilegedUser() {
 			if !sys.SudoSessionActive() {
@@ -32,27 +37,14 @@ var Root = &cobra.Command{
 			}
 
 			var cmdArgs []string
-			if logLevel != "" {
-				cmdArgs = append(cmdArgs, "--log", logLevel)
+			if level != "" {
+				cmdArgs = append(cmdArgs, "--log", level)
 			}
 
 			err := sys.InvokeSelfWithSudo(cmdArgs...)
 			if err != nil {
 				return err
 			}
-		}
-
-		switch logLevel {
-		case "ERR":
-			Logger.SetLevel(log.ErrorLevel)
-		case "WARN":
-			Logger.SetLevel(log.WarnLevel)
-		case "INFO":
-			Logger.SetLevel(log.InfoLevel)
-		case "DEBUG":
-			Logger.SetLevel(log.DebugLevel)
-		default:
-			Logger.SetLevel(log.FatalLevel)
 		}
 
 		orb, err := mgr.New(slog.New(Logger), vals.ManagedRoot, vals.TreeConfig)

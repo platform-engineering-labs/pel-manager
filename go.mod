@@ -9,8 +9,8 @@ require (
 	charm.land/huh/v2 v2.0.3
 	charm.land/lipgloss/v2 v2.0.2
 	github.com/charmbracelet/log v1.0.0
-	github.com/goforj/godump v1.9.1
-	github.com/platform-engineering-labs/orbital v0.1.10
+	github.com/charmbracelet/x/exp/charmtone v0.0.0-20260316093931-f2fb44ab3145
+	github.com/platform-engineering-labs/orbital v0.1.11
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -47,7 +47,6 @@ require (
 	github.com/charmbracelet/ultraviolet v0.0.0-20260316091819-b93f6a3b8502 // indirect
 	github.com/charmbracelet/x/ansi v0.11.6 // indirect
 	github.com/charmbracelet/x/cellbuf v0.0.15 // indirect
-	github.com/charmbracelet/x/exp/charmtone v0.0.0-20260316093931-f2fb44ab3145 // indirect
 	github.com/charmbracelet/x/exp/ordered v0.1.0 // indirect
 	github.com/charmbracelet/x/exp/strings v0.1.0 // indirect
 	github.com/charmbracelet/x/term v0.2.2 // indirect

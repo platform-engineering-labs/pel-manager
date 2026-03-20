@@ -155,8 +155,8 @@ github.com/muesli/termenv v0.16.0 h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc
 github.com/muesli/termenv v0.16.0/go.mod h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk=
 github.com/naegelejd/go-acl v0.0.0-20200406162857-ebe394c522e5 h1:R10+S1Knv6udBjyDYU84+zD5R8qLWg7wSH/ddhJSzX4=
 github.com/naegelejd/go-acl v0.0.0-20200406162857-ebe394c522e5/go.mod h1:nMzsOoQWESVMF6s+hAF8Qnc14fUIpL7pfmGm6MV8B2g=
-github.com/platform-engineering-labs/orbital v0.1.10 h1:a9NGCUK1Axpa/jwA40sofIoaaOv9AFK4fM20uebRcPU=
-github.com/platform-engineering-labs/orbital v0.1.10/go.mod h1:KgJ0TACuN3e7gSjKNgpg1JCIU52JOA50SC6bhVc0x00=
+github.com/platform-engineering-labs/orbital v0.1.11 h1:FGmvRQZQjdc+A1EI37Cy8BctFd7vSd+WEZh/wFQv7uk=
+github.com/platform-engineering-labs/orbital v0.1.11/go.mod h1:KgJ0TACuN3e7gSjKNgpg1JCIU52JOA50SC6bhVc0x00=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rivo/uniseg v0.4.7 h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ=
