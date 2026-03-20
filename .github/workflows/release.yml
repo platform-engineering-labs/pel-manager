@@ -39,9 +39,15 @@ jobs:
       - name: Install just
         uses: extractions/setup-just@v3
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-region: us-west-2
+          role-to-assume: arn:aws:iam::897722706215:role/github-pel
+          role-session-name: PublishSession
+
       - name: Publish
         run: just publish-setup
-
 
   linux_arm64:
     runs-on: ubuntu-24.04-arm
