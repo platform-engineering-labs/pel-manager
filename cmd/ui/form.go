@@ -17,9 +17,14 @@ const (
 	Install Operation = "install"
 	Update  Operation = "update"
 	Remove  Operation = "remove"
+
+	Updatable   State = "updatable"
+	Installable State = "installable"
+	Removable   State = "removable"
 )
 
 type Operation = string
+type State = string
 type SetupRoot struct {
 	Confirm bool
 
@@ -48,15 +53,14 @@ func (sr *SetupRoot) Run() error {
 type Manager struct {
 	Available map[string]*records.Status
 
-	Selection      string
-	Operation      bool
-	OperationLabel string
+	Selection string
+	Operation Operation
 
 	form *huh.Form
 }
 
 func NewManager(available map[string]*records.Status) *Manager {
-	m := &Manager{Available: available, Operation: true}
+	m := &Manager{Available: available, Operation: ""}
 	var options []huh.Option[string]
 	keys := slices.Collect(maps.Keys(available))
 	slices.Sort(keys)
@@ -96,83 +100,54 @@ func NewManager(available map[string]*records.Status) *Manager {
 		),
 
 		huh.NewGroup(
-			huh.NewConfirm().
-				TitleFunc(func() string {
-					return fmt.Sprintf("Manage: %s", m.Selection)
-				}, &m.Selection).
-				Affirmative("Cancel").
-				Negative("Remove").
-				Value(&m.Operation),
-		).WithHideFunc(func() bool {
-			hasUpdate, _ := m.Available[m.Selection].HasUpdate()
-			if m.Available[m.Selection].Status == candidate.Available {
-				return true
-			} else {
-				return hasUpdate == true
-			}
-		}),
-		huh.NewGroup(
-			huh.NewConfirm().
+			NewMultiButton[Operation]().
 				TitleFunc(func() string {
 					return fmt.Sprintf("Manage: %s", m.Selection)
 				}, &m.Selection).
 				DescriptionFunc(func() string {
-					return fmt.Sprintf("\nversion: %s", m.Available[m.Selection].Available[0].Version.Short())
+					return fmt.Sprintf("\nversion: %s\n", m.Available[m.Selection].Available[0].Version.Short())
 				}, &m.Selection).
-				Affirmative("Update").
-				Negative("Remove").
+				OptionsFunc(func() []ButtonOption[Operation] {
+					switch m.State() {
+					case Installable:
+						return []ButtonOption[Operation]{
+							NewButtonOption("Install", Install),
+							NewButtonOption("Cancel", Cancel),
+						}
+					case Removable:
+						return []ButtonOption[Operation]{
+							NewButtonOption("Cancel", Cancel),
+							NewButtonOption("Remove", Remove),
+						}
+					case Updatable:
+						return []ButtonOption[Operation]{
+							NewButtonOption("Update", Update),
+							NewButtonOption("Remove", Remove),
+							NewButtonOption("Cancel", Cancel),
+						}
+					}
+					return nil
+				}, &m.Selection).
 				Value(&m.Operation),
-		).WithHideFunc(func() bool {
-			hasUpdate, _ := m.Available[m.Selection].HasUpdate()
-			if m.Available[m.Selection].Status == candidate.Available {
-				return true
-			} else {
-				return hasUpdate == false
-			}
-		}),
-		huh.NewGroup(
-			huh.NewConfirm().
-				TitleFunc(func() string {
-					return fmt.Sprintf("Manage: %s", m.Selection)
-				}, &m.Selection).
-				DescriptionFunc(func() string {
-					return fmt.Sprintf("\nversion: %s", m.Available[m.Selection].Available[0].Version.Short())
-				}, &m.Selection).
-				Affirmative("Install").
-				Negative("Cancel").
-				Value(&m.Operation),
-		).WithHideFunc(func() bool {
-			return m.Available[m.Selection].Status != candidate.Available
-		}),
+		),
 	).WithTheme(&FormTheme{})
 
 	return m
 }
 
-func (m Manager) Request() Operation {
-	installed := m.Available[m.Selection].Status == candidate.Frozen || m.Available[m.Selection].Status == candidate.Installed
-	hasUpdate, _ := m.Available[m.Selection].HasUpdate()
-
-	switch m.Operation {
-	case true:
-		if hasUpdate == false {
-			return Cancel
-		}
-
-		if installed {
-			return Update
-		} else {
-			return Install
-		}
-	default:
-		if installed {
-			return Remove
-		} else {
-			return Cancel
-		}
-	}
-}
-
 func (m Manager) Run() error {
 	return m.form.Run()
+}
+
+func (m Manager) State() State {
+	if m.Available[m.Selection].Status == candidate.Available {
+		return Installable
+	} else {
+		hasUpdate, _ := m.Available[m.Selection].HasUpdate()
+		if hasUpdate {
+			return Updatable
+		} else {
+			return Removable
+		}
+	}
 }

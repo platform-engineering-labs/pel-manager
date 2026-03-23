@@ -10,6 +10,8 @@ require (
 	charm.land/lipgloss/v2 v2.0.2
 	github.com/charmbracelet/log v1.0.0
 	github.com/charmbracelet/x/exp/charmtone v0.0.0-20260316093931-f2fb44ab3145
+	github.com/goforj/godump v1.9.1
+	github.com/mitchellh/hashstructure/v2 v2.0.2
 	github.com/platform-engineering-labs/orbital v0.1.14
 	github.com/spf13/cobra v1.10.2
 )
@@ -66,7 +68,6 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.21 // indirect
 	github.com/miekg/dns v1.1.72 // indirect
-	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/muesli/cancelreader v0.2.2 // indirect
 	github.com/muesli/mango v0.2.0 // indirect
 	github.com/muesli/mango-cobra v1.3.0 // indirect

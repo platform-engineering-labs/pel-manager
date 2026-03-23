@@ -53,7 +53,7 @@ var Root = &cobra.Command{
 		}
 
 		reqOp := ""
-		switch manager.Request() {
+		switch manager.Operation {
 		case ui.Install:
 			reqOp = "Installing"
 		case ui.Update:
@@ -67,7 +67,7 @@ var Root = &cobra.Command{
 		return spinner.New().
 			Title(fmt.Sprintf("%s: %s", reqOp, manager.Selection)).
 			ActionWithErr(func(ctx context.Context) error {
-				switch manager.Request() {
+				switch manager.Operation {
 				case ui.Install:
 					return orb.Install(manager.Selection)
 				case ui.Update:
