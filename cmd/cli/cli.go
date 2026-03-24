@@ -7,6 +7,7 @@ import (
 
 	"charm.land/huh/v2/spinner"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
+	"github.com/platform-engineering-labs/pel-mananager/vals"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +18,7 @@ func init() {
 	Root.AddCommand(Update)
 	Root.AddCommand(Versions)
 
+	Root.PersistentFlags().String("install-path", vals.ManagedRoot, "target install path")
 	Root.PersistentFlags().String("log", "", "log level: ERR | WARN | INFO | DEBUG | FATAL")
 }
 

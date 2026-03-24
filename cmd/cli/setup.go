@@ -12,6 +12,7 @@ import (
 )
 
 func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
+	root, _ := cmd.Flags().GetString("install-path")
 	level, _ := cmd.Flags().GetString("log")
 	if level == "" {
 		level = "INFO"
@@ -19,7 +20,7 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 
 	LoggerFromFlag(level, nil)
 
-	orb, err := setup()
+	orb, err := setup(root)
 	if err != nil {
 		return nil, err
 	}
@@ -35,9 +36,10 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 }
 
 func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
+	root, _ := cmd.Flags().GetString("install-path")
 	LoggerFromFlag(cmd.Flags().GetString("log"))
 
-	orb, err := setup()
+	orb, err := setup(root)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +62,7 @@ func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
 	return orb, nil
 }
 
-func setup() (*mgr.Manager, error) {
+func setup(root string) (*mgr.Manager, error) {
 	if !sys.IsPrivilegedUser() {
 		if !sys.SudoSessionActive() {
 			fmt.Println("PEL Manager must run as a privileged user")
@@ -72,5 +74,5 @@ func setup() (*mgr.Manager, error) {
 		}
 	}
 
-	return mgr.New(slog.New(Logger), vals.ManagedRoot, vals.TreeConfig)
+	return mgr.New(slog.New(Logger), root, vals.TreeConfig)
 }
