@@ -18,6 +18,7 @@ func init() {
 	Root.AddCommand(Update)
 	Root.AddCommand(Versions)
 
+	Root.PersistentFlags().String("channel", "stable", "channel to install from")
 	Root.PersistentFlags().String("install-path", vals.ManagedRoot, "target install path")
 	Root.PersistentFlags().String("log", "", "log level: ERR | WARN | INFO | DEBUG | FATAL")
 }
