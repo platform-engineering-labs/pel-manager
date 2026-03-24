@@ -10,7 +10,7 @@ require (
 	charm.land/lipgloss/v2 v2.0.2
 	github.com/charmbracelet/log v1.0.0
 	github.com/charmbracelet/x/exp/charmtone v0.0.0-20260316093931-f2fb44ab3145
-	github.com/platform-engineering-labs/orbital v0.1.17
+	github.com/platform-engineering-labs/orbital v0.1.21
 	github.com/spf13/cobra v1.10.2
 )
 

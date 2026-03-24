@@ -3,6 +3,7 @@ package cli
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"charm.land/huh/v2/spinner"
@@ -30,6 +31,9 @@ var Root = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		orb, err := SetupInteractive(cmd)
 		if err != nil {
+			if strings.Contains(err.Error(), "cancelled") {
+				return nil
+			}
 			return err
 		}
 

@@ -37,11 +37,11 @@ func NewSetupRoot() *SetupRoot {
 		huh.NewGroup(
 			huh.NewConfirm().
 				Title(fmt.Sprintf("Setup software root at: %s", vals.ManagedRoot)).
-				Affirmative("Yes!").
-				Negative("No.").
+				Affirmative("Yes").
+				Negative("No").
 				Value(&sr.Confirm),
 		),
-	)
+	).WithTheme(&FormTheme{})
 
 	return sr
 }

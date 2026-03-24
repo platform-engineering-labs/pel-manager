@@ -1,12 +1,11 @@
 package cli
 
 import (
-	"fmt"
+	"errors"
 	"log/slog"
 
 	"github.com/platform-engineering-labs/orbital/mgr"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
-	"github.com/platform-engineering-labs/pel-mananager/sys"
 	"github.com/platform-engineering-labs/pel-mananager/vals"
 	"github.com/spf13/cobra"
 )
@@ -58,6 +57,8 @@ func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
 			if err != nil {
 				return nil, err
 			}
+		} else {
+			return nil, errors.New("cancelled")
 		}
 	}
 
@@ -65,17 +66,6 @@ func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
 }
 
 func setup(root string, channel string) (*mgr.Manager, error) {
-	if !sys.IsPrivilegedUser() {
-		if !sys.SudoSessionActive() {
-			fmt.Println("PEL Manager must run as a privileged user")
-		}
-
-		err := sys.InvokeSelfWithSudo()
-		if err != nil {
-			return nil, err
-		}
-	}
-
 	cfg := vals.TreeConfig
 	cfg.Repositories[0].Uri.Fragment = channel
 
