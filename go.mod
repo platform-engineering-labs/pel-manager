@@ -10,7 +10,7 @@ require (
 	charm.land/lipgloss/v2 v2.0.2
 	github.com/charmbracelet/log v1.0.0
 	github.com/charmbracelet/x/exp/charmtone v0.0.0-20260316093931-f2fb44ab3145
-	github.com/platform-engineering-labs/orbital v0.1.21
+	github.com/platform-engineering-labs/orbital v0.1.23
 	github.com/spf13/cobra v1.10.2
 )
 
@@ -91,5 +91,5 @@ require (
 	golang.org/x/tools v0.43.0 // indirect
 	gonum.org/v1/gonum v0.17.0 // indirect
 	google.golang.org/protobuf v1.36.11 // indirect
-	resty.dev/v3 v3.0.0-beta.6 // indirect
+	resty.dev/v3 v3.0.0-beta.6.0.20260127085140-f531c9de7027 // indirect
 )
