@@ -9,6 +9,7 @@ import (
 	"charm.land/huh/v2/spinner"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
 	"github.com/platform-engineering-labs/pel-mananager/vals"
+	"github.com/platform-engineering-labs/pelx/theme"
 	"github.com/spf13/cobra"
 )
 
@@ -42,7 +43,7 @@ var Root = &cobra.Command{
 			ActionWithErr(func(ctx context.Context) error {
 				return orb.Refresh()
 			}).
-			WithTheme(&ui.SpinnerTheme{}).
+			WithTheme(&theme.SpinnerTheme{}).
 			Run()
 		if err != nil {
 			return err
@@ -86,7 +87,7 @@ var Root = &cobra.Command{
 				}
 				return nil
 			}).
-			WithTheme(&ui.SpinnerTheme{}).
+			WithTheme(&theme.SpinnerTheme{}).
 			Run()
 	},
 }

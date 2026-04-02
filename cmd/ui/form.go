@@ -10,6 +10,7 @@ import (
 	"github.com/platform-engineering-labs/orbital/opm/candidate"
 	"github.com/platform-engineering-labs/orbital/opm/records"
 	"github.com/platform-engineering-labs/pel-mananager/vals"
+	"github.com/platform-engineering-labs/pelx/theme"
 )
 
 const (
@@ -41,7 +42,7 @@ func NewSetupRoot() *SetupRoot {
 				Negative("No").
 				Value(&sr.Confirm),
 		),
-	).WithTheme(&FormTheme{})
+	).WithTheme(&theme.FormTheme{})
 
 	return sr
 }
@@ -130,7 +131,7 @@ func NewManager(available map[string]*records.Status) *Manager {
 				}, &m.Selection).
 				Value(&m.Operation),
 		),
-	).WithTheme(&FormTheme{})
+	).WithTheme(&theme.FormTheme{})
 
 	return m
 }
