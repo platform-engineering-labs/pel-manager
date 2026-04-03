@@ -155,8 +155,8 @@ github.com/muesli/termenv v0.16.0 h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc
 github.com/muesli/termenv v0.16.0/go.mod h1:ZRfOIKPFDYQoDFF4Olj7/QJbW60Ol/kL1pU3VfY/Cnk=
 github.com/naegelejd/go-acl v0.0.0-20260323030528-42e4d61407df h1:1xWk/De6cs3h2rv2LZA/jcLFTmEGD9EluHsKaYq+Gm0=
 github.com/naegelejd/go-acl v0.0.0-20260323030528-42e4d61407df/go.mod h1:sTJHuiEPB0WNdPYPOP9M6FQU4YTHemXgDLIQqkbBdDI=
-github.com/platform-engineering-labs/orbital v0.1.29 h1:aCYnyB3LL5SlUCIOv4ZPkdDKJbxN67okzFwhyHgfy3A=
-github.com/platform-engineering-labs/orbital v0.1.29/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
+github.com/platform-engineering-labs/orbital v0.1.34 h1:oGvnUTYH25W9TVXjpn/7h86bzl5y/bIgBga2u/u/KG8=
+github.com/platform-engineering-labs/orbital v0.1.34/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
 github.com/platform-engineering-labs/pelx v0.1.2 h1:4SzttlJIg357KBcbxjwn+rseOlD9vWbJV76V/U1ZUcI=
 github.com/platform-engineering-labs/pelx v0.1.2/go.mod h1:FI3miJ1HwfsSl9MLXbGT2/lKMx8Z8UMLg5Z3P6REfqo=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

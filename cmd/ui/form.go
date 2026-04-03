@@ -32,8 +32,8 @@ type SetupRoot struct {
 	form *huh.Form
 }
 
-func NewSetupRoot() *SetupRoot {
-	sr := &SetupRoot{}
+func NewSetupRoot(confirm bool) *SetupRoot {
+	sr := &SetupRoot{Confirm: confirm}
 	sr.form = huh.NewForm(
 		huh.NewGroup(
 			huh.NewConfirm().

@@ -4,11 +4,14 @@ import (
 	"os"
 
 	"github.com/charmbracelet/log"
+	"github.com/spf13/cobra"
 )
 
 var Logger = log.New(os.Stderr)
 
-func LoggerFromFlag(level string, _ error) {
+func LoggerFromCmd(cmd *cobra.Command) {
+	level, _ := cmd.Flags().GetString("level")
+
 	switch level {
 	case "ERR":
 		Logger.SetLevel(log.ErrorLevel)
@@ -17,6 +20,10 @@ func LoggerFromFlag(level string, _ error) {
 	case "DEBUG":
 		Logger.SetLevel(log.DebugLevel)
 	default:
-		Logger.SetLevel(log.WarnLevel)
+		if cmd.Name() == "pelmgr" {
+			Logger.SetLevel(log.WarnLevel)
+		} else {
+			Logger.SetLevel(log.InfoLevel)
+		}
 	}
 }

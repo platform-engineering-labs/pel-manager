@@ -13,43 +13,26 @@ import (
 func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 	channel, _ := cmd.Flags().GetString("channel")
 	root, _ := cmd.Flags().GetString("install-path")
-	level, _ := cmd.Flags().GetString("log")
-	if level == "" {
-		level = "INFO"
-	}
+	yes, _ := cmd.Flags().GetBool("yes")
 
-	LoggerFromFlag(level, nil)
+	LoggerFromCmd(cmd)
 
-	orb, err := setup(root, channel)
+	cfg := vals.TreeConfig
+	cfg.Repositories[0].Uri.Fragment = channel
+
+	orb, err := mgr.New(slog.New(Logger), root, cfg)
 	if err != nil {
 		return nil, err
 	}
 
 	if orb.Ready() != true {
-		_, err = orb.Initialize()
-		if err != nil {
-			return nil, err
-		}
-	}
+		setupRoot := ui.NewSetupRoot(yes)
 
-	return orb, nil
-}
-
-func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
-	channel, _ := cmd.Flags().GetString("channel")
-	root, _ := cmd.Flags().GetString("install-path")
-	LoggerFromFlag(cmd.Flags().GetString("log"))
-
-	orb, err := setup(root, channel)
-	if err != nil {
-		return nil, err
-	}
-
-	if orb.Ready() != true {
-		setupRoot := ui.NewSetupRoot()
-		err := setupRoot.Run()
-		if err != nil {
-			return nil, err
+		if !yes {
+			err := setupRoot.Run()
+			if err != nil {
+				return nil, err
+			}
 		}
 
 		if setupRoot.Confirm {
@@ -63,11 +46,4 @@ func SetupInteractive(cmd *cobra.Command) (*mgr.Manager, error) {
 	}
 
 	return orb, nil
-}
-
-func setup(root string, channel string) (*mgr.Manager, error) {
-	cfg := vals.TreeConfig
-	cfg.Repositories[0].Uri.Fragment = channel
-
-	return mgr.New(slog.New(Logger), root, cfg)
 }

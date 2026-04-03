@@ -23,6 +23,7 @@ func init() {
 	Root.PersistentFlags().String("channel", "stable", "channel to install from")
 	Root.PersistentFlags().String("install-path", vals.ManagedRoot, "target install path")
 	Root.PersistentFlags().String("log", "", "log level: ERR | WARN | INFO | DEBUG | FATAL")
+	Root.PersistentFlags().Bool("yes", false, "bypass all prompts")
 }
 
 var Root = &cobra.Command{
@@ -30,7 +31,7 @@ var Root = &cobra.Command{
 	Short: "pel manager - install/update/remove PEL tools",
 
 	RunE: func(cmd *cobra.Command, args []string) error {
-		orb, err := SetupInteractive(cmd)
+		orb, err := Setup(cmd)
 		if err != nil {
 			if strings.Contains(err.Error(), "cancelled") {
 				return nil

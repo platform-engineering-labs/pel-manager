@@ -25,6 +25,13 @@ var Install = &cobra.Command{
 			return err
 		}
 
-		return orb.Install(cmd.Flags().Args()...)
+		err = orb.Install(cmd.Flags().Args()...)
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("\nIMPORTANT: ensure you add %s/bin to your PATH, and reload your shell configuration\n", orb.Path)
+
+		return nil
 	},
 }
