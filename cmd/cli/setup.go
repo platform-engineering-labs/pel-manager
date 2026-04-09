@@ -36,7 +36,13 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 		}
 
 		if setupRoot.Confirm {
-			_, err := orb.Initialize()
+			// TODO remove this after a few releases
+			err := cleanup(orb.Path)
+			if err != nil {
+				return nil, err
+			}
+
+			_, err = orb.Initialize()
 			if err != nil {
 				return nil, err
 			}
