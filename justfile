@@ -12,6 +12,7 @@ build:
 
 publish-setup:
     aws s3 cp ./scripts/setup.sh s3://hub.platform.engineering/get/setup.sh
+    aws s3 cp ./scripts/formae.sh s3://hub.platform.engineering/get/formae.sh
 
 publish-bin: build
     aws s3 cp ./dist/bin/pelmgr s3://hub.platform.engineering/get/binaries/{{OS}}-{{ARCH}}/pelmgr
