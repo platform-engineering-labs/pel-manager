@@ -18,7 +18,9 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 	LoggerFromCmd(cmd)
 
 	cfg := vals.TreeConfig
-	cfg.Repositories[0].Uri.Fragment = channel
+	for i := range cfg.Repositories {
+		cfg.Repositories[i].Uri.Fragment = channel
+	}
 
 	orb, err := mgr.New(slog.New(Logger), root, cfg)
 	if err != nil {

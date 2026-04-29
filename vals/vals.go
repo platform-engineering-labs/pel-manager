@@ -28,5 +28,15 @@ var TreeConfig = &tree.Config{
 			Priority: 0,
 			Enabled:  true,
 		},
+		{
+			Uri: url.URL{
+				Scheme:   "https",
+				Host:     "hub.platform.engineering",
+				Path:     "/repos/platform.engineering/community",
+				Fragment: "stable",
+			},
+			Priority: 1,
+			Enabled:  true,
+		},
 	},
 }
