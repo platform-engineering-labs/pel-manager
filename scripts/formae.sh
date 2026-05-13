@@ -18,5 +18,5 @@ if ! curl "https://hub.platform.engineering/get/binaries/${OS}-${ARCH}/pelmgr" 2
 fi
 
 chmod +x ./pelmgr
-./pelmgr install formae "${@}"
+./pelmgr install formae standard "${@}"
 rm -rf ./pelmgr
