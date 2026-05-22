@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"charm.land/huh/v2/spinner"
+	"github.com/platform-engineering-labs/orbital/opm/records"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
 	"github.com/platform-engineering-labs/pel-mananager/vals"
 	"github.com/platform-engineering-labs/pelx/theme"
@@ -55,7 +56,16 @@ var Root = &cobra.Command{
 			return err
 		}
 
-		manager := ui.NewManager(available)
+		filtered := make(map[string]*records.Status)
+		// Filter list to top level tools for now
+		for k, v := range available {
+			switch k {
+			case "formae", "orbital", "pkl":
+				filtered[k] = v
+			}
+		}
+
+		manager := ui.NewManager(filtered)
 		err = manager.Run()
 		if err != nil {
 			return err
