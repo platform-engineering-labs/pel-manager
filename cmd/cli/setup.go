@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log/slog"
 
+	"github.com/platform-engineering-labs/orbital"
 	"github.com/platform-engineering-labs/orbital/mgr"
 	"github.com/platform-engineering-labs/pel-mananager/cmd/ui"
 	"github.com/platform-engineering-labs/pel-mananager/vals"
@@ -22,7 +23,7 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 		cfg.Repositories[i].Uri.Fragment = channel
 	}
 
-	orb, err := mgr.New(slog.New(Logger), root, cfg)
+	orb, err := mgr.New(slog.New(Logger), orbital.WithSudo(), orbital.WithWritable(), orbital.WithEmbedded(root, cfg))
 	if err != nil {
 		return nil, err
 	}
@@ -39,7 +40,7 @@ func Setup(cmd *cobra.Command) (*mgr.Manager, error) {
 
 		if setupRoot.Confirm {
 			// TODO remove this after a few releases
-			err := cleanup(orb.Path)
+			err := cleanup(orb.Path())
 			if err != nil {
 				return nil, err
 			}

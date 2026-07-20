@@ -159,6 +159,10 @@ github.com/platform-engineering-labs/orbital v0.1.35 h1:kh6khvl6Ri9TKrqGGzN52oeu
 github.com/platform-engineering-labs/orbital v0.1.35/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
 github.com/platform-engineering-labs/orbital v0.1.38 h1:YRAYL9OWb+uiJc/qlPCB1u5wYpT6VUdHMUOnl2oQUV8=
 github.com/platform-engineering-labs/orbital v0.1.38/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
+github.com/platform-engineering-labs/orbital v0.1.44-0.20260718192930-f49a2aa13a3e h1:+BwTwzhHAnWb8MOkDwuLDSqy452i0hRlXVqU/8TLZoU=
+github.com/platform-engineering-labs/orbital v0.1.44-0.20260718192930-f49a2aa13a3e/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
+github.com/platform-engineering-labs/orbital v0.2.5 h1:7rihasWnR68ORytqLubR5WMJchv/mxoWSCB7MqaB9tU=
+github.com/platform-engineering-labs/orbital v0.2.5/go.mod h1:wwVPqOmW5RO78dDzL/G5CN1Ioao0P/aUsOZVrPVx64s=
 github.com/platform-engineering-labs/pelx v0.1.4 h1:q2NHuUNXWT/ePlyuHw52X+2AbLUjhCUDc1ifLzgOEUM=
 github.com/platform-engineering-labs/pelx v0.1.4/go.mod h1:FI3miJ1HwfsSl9MLXbGT2/lKMx8Z8UMLg5Z3P6REfqo=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=

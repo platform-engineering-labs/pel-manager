@@ -30,7 +30,7 @@ var Install = &cobra.Command{
 			return err
 		}
 
-		fmt.Printf("\nIMPORTANT: ensure you add %s/bin to your PATH, and reload your shell configuration\n", orb.Path)
+		fmt.Printf("\nIMPORTANT: ensure you add %s/bin to your PATH, and reload your shell configuration\n", orb.Path())
 
 		return nil
 	},
